@@ -9,9 +9,7 @@ body {
     flex-direction: column;
     align-items: center;
     height: 100%;
-
 }
-
 
 .container {
     border-style: solid;
@@ -20,43 +18,14 @@ body {
     width: 1000px;
 }
 
-
-.content {
-    padding: 2px;
-    background-color:cornflowerblue;
-    display: flex;
-    height: 100px;
-    flex-grow: 1;
-  
-}
-
 .rowcon {
     display: flex;
-    height: 100px;
-    
-    background-color:aquamarine;
-    margin: 2px;
- 
+    background-color:aquamarine; 
 }
 
-.rowdivs {
-    margin: 2px;
-    height: 100%;
-    width: 100%;
-    background-color:darkgoldenrod;
+.rowdivs {     
+     background-color: coral; 
     display: flex;
-}
-
-
-
-
-.subdivrow {
-    margin: 2px;
-    height: 100%;
-    width: 100%;
-    background-color:darkgoldenrod;
-    display: flex;
-
 }
 
 

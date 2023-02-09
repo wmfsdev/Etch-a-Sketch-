@@ -1,23 +1,49 @@
-
+    
+    
+    button()
 
     function start() {
-        
-        squareInput = prompt("Grid size?", 30); // user can establish their own grid size
-        generateRows();
-        generateDivs();
+
+        let element = document.querySelector(".container");
+        while (element.firstChild) {
+            element.removeChild(element.firstChild);
+    }   // clears the container of child elements (if there are any) ready to input new grid value
+
+        let inputValue = input()
+        generateRows(inputValue);
+        generateDivs(inputValue);
         cursor();
     }
 
+    function input() {
+        return inputValue = prompt("Grid size?", 1); // user can establish their own grid size
+        
+    }
+    
+    function button() {
 
-    function generateRows() {
+        const buttoncontainer = document.querySelector(`body`);
+
+        const button = document.createElement(`button`);
+        button.classList.add(`button`);
+        button.textContent = "Button"
+        buttoncontainer.insertBefore(button, buttoncontainer.firstElementChild);
+
+        button.addEventListener(`click`, start);
+    }
+
+    // button to generate prompt for user determined grid size
+
+
+    function generateRows(inputValue) {
     
         const secondrow = document.querySelector(`.container`);
     
-        for (let i = 0 ; i < squareInput ; i++) {
+        for (let i = 0 ; i < inputValue ; i++) {
 
             const rowcon = document.createElement(`div`);
             rowcon.classList.add(`rowcon`);
-            rowcon.setAttribute('style', `height: ${1000 / squareInput}px; flex-grow: 1;`); 
+            rowcon.setAttribute('style', `height: ${500 / inputValue}px; flex-grow: 1;`); 
             // sets height of all "rows" to fit evenly into the parent container
 
             secondrow.appendChild(rowcon);  
@@ -27,7 +53,7 @@
         
     }
 
-    function generateDivs() {
+    function generateDivs(inputValue) {
 
         const rowcondivs = document.querySelectorAll(`.rowcon`);
 
@@ -43,7 +69,7 @@
 
                 rowdivs.classList.add(`rowdivs`);
 
-                rowdivs.setAttribute('style', `height: ${1000 / squareInput}px; flex-grow: 1;`);
+                rowdivs.setAttribute('style', `height: ${500 / inputValue}px; flex-grow: 1;`);
 
                 rowcondivs[n].appendChild(rowdivs); 
             }  
@@ -81,8 +107,3 @@
     }
 
     // querySelector for each "square" in the grid to create a "hover" effect for the cursor
-
-
-    start()
-
-

@@ -2,6 +2,9 @@
     
     button()
 
+    let inputValue;  
+    // stores input value generated from either 'input' or 'errorInput' function 
+
     function start() {
 
         let element = document.querySelector(".container");
@@ -9,16 +12,31 @@
             element.removeChild(element.firstChild);
     }   // clears the container of child elements (if there are any) ready to input new grid value
 
-        let inputValue = input()
+        input()
         generateRows(inputValue);
         generateDivs(inputValue);
         cursor();
     }
 
     function input() {
-        return inputValue = prompt("Grid size?", 1); // user can establish their own grid size
-        
+        value = prompt("Your canvas has a 1:1 fixed ratio, you will only need to enter a single value. No larger than 100. ", 1); 
+            if (value > 100) {
+                errorInput();
+            } else inputValue = value      
     }
+
+    // user can establish their own grid size
+
+
+    function errorInput() {
+        value = prompt("Remember, no larger than 100. Try again.", 101);
+            if (value > 100) {
+                errorInput();
+            } else inputValue = value;
+    }
+
+    // alternative prompt in case user enters grid size greater than 100
+
     
     function button() {
 
@@ -26,7 +44,7 @@
 
         const button = document.createElement(`button`);
         button.classList.add(`button`);
-        button.textContent = "Button"
+        button.textContent = "Blank Canvas"
         buttoncontainer.insertBefore(button, buttoncontainer.firstElementChild);
 
         button.addEventListener(`click`, start);

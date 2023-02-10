@@ -29,8 +29,6 @@ body {
 }
 
 .rowdivs {     
-     background-color: coral; 
+    background-color: coral; 
     display: flex;
 }
-
-

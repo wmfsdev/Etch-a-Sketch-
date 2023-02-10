@@ -3,7 +3,9 @@
     button()
 
     let inputValue;  
-    // stores input value generated from either 'input' or 'errorInput' function 
+    // stores input value generated from either 'input' or 'errorInput' function
+    
+    const rgbArray = []
 
     function start() {
 
@@ -11,18 +13,39 @@
         while (element.firstChild) {
             element.removeChild(element.firstChild);
     }   // clears the container of child elements (if there are any) ready to input new grid value
-
+          
         input()
         generateRows(inputValue);
         generateDivs(inputValue);
         cursor();
+        console.log(rgbArray)
+        
     }
 
+
+
+    function generateNumber() {
+        return Math.floor(Math.random() * 256);     // will return number between 0 and 255
+    }
+
+
+    function rgbValues() {
+
+        for (let i = 0 ; i < 3 ; i++) {
+            rgbArray.push(generateNumber());
+        }
+
+    }
+
+    // pushes three random values into an RGB array
+
+
     function input() {
-        value = prompt("Your canvas has a 1:1 fixed ratio, you will only need to enter a single value. No larger than 100. ", 1); 
+        value = prompt("Your canvas has a 1:1 fixed ratio, you will only need to enter a single value. No larger than 100. ", 20); 
             if (value > 100) {
                 errorInput();
-            } else inputValue = value      
+            } else inputValue = value 
+
     }
 
     // user can establish their own grid size
@@ -33,6 +56,7 @@
             if (value > 100) {
                 errorInput();
             } else inputValue = value;
+
     }
 
     // alternative prompt in case user enters grid size greater than 100
@@ -48,6 +72,7 @@
         buttoncontainer.insertBefore(button, buttoncontainer.firstElementChild);
 
         button.addEventListener(`click`, start);
+
     }
 
     // button to generate prompt for user determined grid size
@@ -65,11 +90,12 @@
             // sets height of all "rows" to fit evenly into the parent container
 
             secondrow.appendChild(rowcon);  
+        }
+
     }
 
-    // generates a number of <div> "rows" based on the value entered by the user
-        
-    }
+    // generates a number of <div> "rows" based on the value entered by the user    
+
 
     function generateDivs(inputValue) {
 
@@ -102,13 +128,19 @@
 
     function cursor() {
   
-        const test = document.querySelectorAll(`.rowdivs, .rowcon`)
+        const test = document.querySelectorAll(`.rowdivs`)
   
             test.forEach((div) => {
 
             div.addEventListener(`mouseover`, function (e) {
-                e.target.style.backgroundColor = "cornflowerblue";
+                rgbValues()
+                e.target.style.backgroundColor = `rgb(${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]})`;
+                // console.log(rgbArray)
+                // assigns randomised RGB values for each mouseover
 
+                rgbArray.splice(0, 3)
+                // console.log(rgbArray)
+                // splice method to replace the pre-exisitng RGB values in the array with new randomised values
             });
 
         });
@@ -116,7 +148,7 @@
             test.forEach((div) => {
 
             div.addEventListener(`mouseleave`, function (e) {
-                e.target.style.backgroundColor = "coral";
+                e.target.style.backgroundColor = `rgb(${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]})`;
 
             });
 

@@ -36,16 +36,16 @@
 
 
     function input() {
-        value = prompt("Your canvas has a 1:1 fixed ratio, you will only need to enter a single value. No larger than 100. ", 5); 
-            if (value > 100) {
+        value = prompt("Your canvas has a 1:1 fixed ratio, you will only need to enter a single value. No larger than 64. ", 5); 
+            if (value > 64) {
                 errorInput();
             } else inputValue = value 
     }   // user can establish their own grid size
 
 
     function errorInput() {
-        value = prompt("Remember, no larger than 100. Try again.", 101);
-            if (value > 100) {
+        value = prompt("Remember, no larger than 64. Try again.", 101);
+            if (value > 64) {
                 errorInput();
             } else inputValue = value;
     }   // alternative prompt in case user enters grid size greater than 100
@@ -244,4 +244,5 @@
             });                    
         });
     }
+    
     

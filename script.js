@@ -5,14 +5,14 @@
     let inputValue;  
     // stores input value generated from either 'input' or 'errorInput' function
     
-    const rgbArray = []
+    let rgbArray = []
 
     function start() {
 
         let element = document.querySelector(".container");
         while (element.firstChild) {
             element.removeChild(element.firstChild);
-    }   // clears the container of child elements (if there are any) ready to input new grid value
+        }   // clears the container of child elements (if there are any) ready to input new grid value
         
         input()
         generateRows(inputValue);
@@ -113,28 +113,17 @@
     
         div.addEventListener(`mouseenter`, function (e) {
 
-            const getColor = window.getComputedStyle(div);     
-            const divRgb = getColor.getPropertyValue('background-color');
+            let getColor = window.getComputedStyle(div);     
+            let divRgb = getColor.getPropertyValue('background-color');
 
                 if (divRgb == "rgb(255, 127, 80)")  {
                     
                     rgbValues() 
                     e.target.style.backgroundColor = `rgb(${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]})`; 
-                    rgbArray.splice(0, 3)
-                    rowDivRtgb.forEach((div) => {
-
-                        div.addEventListener(`mouseleave`, function (e) {
-                        e.target.style.backgroundColor = `rgb(${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]})`;
-                        
-                        });
-                    });
-
-                    rowDivRtgb.forEach((div) => {
-
-                        div.addEventListener(`mouseleave`, function (e) {     
-                        e.target.style.filter = `brightness(0.99)`
-                
-                        });
+                    rgbArray.splice(0, 3);
+                    
+                    div.addEventListener(`mouseleave`, function (e) {     
+                    e.target.style.filter = `brightness(0.99)`
                     });
                 } 
             });      

@@ -17,8 +17,8 @@
         input()
         generateRows(inputValue);
         generateDivs(inputValue);
-        //getDivRgb();
-        //getDivBrightness()
+        getDivRgb();
+        getDivBrightness()
     }
     
 

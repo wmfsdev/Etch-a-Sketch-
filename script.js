@@ -13,20 +13,18 @@
         while (element.firstChild) {
             element.removeChild(element.firstChild);
     }   // clears the container of child elements (if there are any) ready to input new grid value
-          
+        
         input()
         generateRows(inputValue);
         generateDivs(inputValue);
-        cursor();
-        console.log(rgbArray)
-        
+        //getDivRgb();
+        //getDivBrightness()
     }
-
-
+    
 
     function generateNumber() {
-        return Math.floor(Math.random() * 256);     // will return number between 0 and 255
-    }
+        return Math.floor(Math.random() * 256);     
+    }   // will return number between 0 and 255
 
 
     function rgbValues() {
@@ -34,21 +32,15 @@
         for (let i = 0 ; i < 3 ; i++) {
             rgbArray.push(generateNumber());
         }
-
-    }
-
-    // pushes three random values into an RGB array
+    }   // pushes three random values into an RGB array
 
 
     function input() {
-        value = prompt("Your canvas has a 1:1 fixed ratio, you will only need to enter a single value. No larger than 100. ", 20); 
+        value = prompt("Your canvas has a 1:1 fixed ratio, you will only need to enter a single value. No larger than 100. ", 5); 
             if (value > 100) {
                 errorInput();
             } else inputValue = value 
-
-    }
-
-    // user can establish their own grid size
+    }   // user can establish their own grid size
 
 
     function errorInput() {
@@ -56,10 +48,7 @@
             if (value > 100) {
                 errorInput();
             } else inputValue = value;
-
-    }
-
-    // alternative prompt in case user enters grid size greater than 100
+    }   // alternative prompt in case user enters grid size greater than 100
 
     
     function button() {
@@ -68,14 +57,11 @@
 
         const button = document.createElement(`button`);
         button.classList.add(`button`);
-        button.textContent = "Blank Canvas"
+        button.textContent = "Etch that Sketch!"
         buttoncontainer.insertBefore(button, buttoncontainer.firstElementChild);
 
         button.addEventListener(`click`, start);
-
-    }
-
-    // button to generate prompt for user determined grid size
+    }   // button to generate prompt for user determined grid size
 
 
     function generateRows(inputValue) {
@@ -91,10 +77,7 @@
 
             secondrow.appendChild(rowcon);  
         }
-
-    }
-
-    // generates a number of <div> "rows" based on the value entered by the user    
+    }   // generates a number of <div> "rows" based on the value entered by the user    
 
 
     function generateDivs(inputValue) {
@@ -116,44 +99,160 @@
                 rowdivs.setAttribute('style', `height: ${500 / inputValue}px; flex-grow: 1;`);
 
                 rowcondivs[n].appendChild(rowdivs); 
-            }  
-            
+            }    
         }
+     }  // generates another row of divs, this time populating those divs inside the previously created row
+        // nested for loop to make sure the second set of divs is iterated through the correct number of times
 
-    }
+       
+    function getDivRgb() {
 
-    // generates another row of divs, this time populating those divs inside the previously created row
-    // nested for loop to make sure the second set of divs is iterated through the correct number of times
+        const rowDivRtgb = document.querySelectorAll(`.rowdivs`)
 
+        rowDivRtgb.forEach((div) => {
+    
+        div.addEventListener(`mouseenter`, function (e) {
 
-    function cursor() {
-  
-        const test = document.querySelectorAll(`.rowdivs`)
-  
-            test.forEach((div) => {
+            const getColor = window.getComputedStyle(div);     
+            const divRgb = getColor.getPropertyValue('background-color');
 
+                if (divRgb == "rgb(255, 127, 80)")  {
+                    
+                    rgbValues() 
+                    e.target.style.backgroundColor = `rgb(${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]})`; 
+                    rgbArray.splice(0, 3)
+                    rowDivRtgb.forEach((div) => {
+
+                        div.addEventListener(`mouseleave`, function (e) {
+                        e.target.style.backgroundColor = `rgb(${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]})`;
+                        
+                        });
+                    });
+
+                    rowDivRtgb.forEach((div) => {
+
+                        div.addEventListener(`mouseleave`, function (e) {     
+                        e.target.style.filter = `brightness(0.99)`
+                
+                        });
+                    });
+                } 
+            });      
+        });    
+    }   
+        // changes div background colour to randomised RGB value for as long as it is not the preset value of
+        // 'coral' rgb(255, 127, 80). On mouseleave it sets the div to a new brightness value just under 1
+        // to prime it for getDivBrightness(). This creates an imperceptible brightness value change which allows
+        // the next function to use that value as its condition in the if statement to darken the targetted div.
+
+    function getDivBrightness() {
+
+        const rowDivRtgb = document.querySelectorAll(`.rowdivs`)
+
+            rowDivRtgb.forEach((div) => {
             div.addEventListener(`mouseover`, function (e) {
-                rgbValues()
-                e.target.style.backgroundColor = `rgb(${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]})`;
-                // console.log(rgbArray)
-                // assigns randomised RGB values for each mouseover
+        
+                if (e.target.style.filter == `brightness(0.99)`) {      
+                    e.target.style.filter = `brightness(0.9)`
 
-                rgbArray.splice(0, 3)
-                // console.log(rgbArray)
-                // splice method to replace the pre-exisitng RGB values in the array with new randomised values
-            });
+                    rowDivRtgb.forEach((div) => {
+                        div.addEventListener(`mouseleave`, function (e) {
+                        e.target.style.filter = `brightness(0.89)`
+                        });
+                    });
 
+
+                } else if (e.target.style.filter == `brightness(0.89)`) {      
+                    e.target.style.filter = `brightness(0.8)`
+
+                    rowDivRtgb.forEach((div) => {
+                        div.addEventListener(`mouseleave`, function (e) {
+                        e.target.style.filter = `brightness(0.79)`
+                        });
+                    });
+
+
+                } else if (e.target.style.filter == `brightness(0.79)`) {      
+                    e.target.style.filter = `brightness(0.7)`
+                    
+                    rowDivRtgb.forEach((div) => {
+                        div.addEventListener(`mouseleave`, function (e) {
+                        e.target.style.filter = `brightness(0.69)`
+                        });
+                    });
+
+
+                } else if (e.target.style.filter == `brightness(0.69)`) {     
+                    e.target.style.filter = `brightness(0.6)`
+
+                    rowDivRtgb.forEach((div) => {
+                        div.addEventListener(`mouseleave`, function (e) {
+                        e.target.style.filter = `brightness(0.59)`
+                        });
+                    });
+
+
+                } else if (e.target.style.filter == `brightness(0.59)`) {
+                    e.target.style.filter = `brightness(0.5)`
+
+                    rowDivRtgb.forEach((div) => {
+                        div.addEventListener(`mouseleave`, function (e) {
+                        e.target.style.filter = `brightness(0.49)`
+                        });
+                    });
+
+
+                } else if (e.target.style.filter == `brightness(0.49)`) {
+                    e.target.style.filter = `brightness(0.4)`
+
+                    rowDivRtgb.forEach((div) => {
+                        div.addEventListener(`mouseleave`, function (e) {
+                        e.target.style.filter = `brightness(0.39)`
+                        });
+                    });
+
+
+                } else if (e.target.style.filter == `brightness(0.39)`) {
+                    e.target.style.filter = `brightness(0.3)`
+
+                    rowDivRtgb.forEach((div) => {
+                        div.addEventListener(`mouseleave`, function (e) {
+                        e.target.style.filter = `brightness(0.29)`
+                        });
+                    });
+
+
+                } else if (e.target.style.filter == `brightness(0.29)`) {
+                    e.target.style.filter = `brightness(0.2)`
+
+                    rowDivRtgb.forEach((div) => {
+                        div.addEventListener(`mouseleave`, function (e) {
+                        e.target.style.filter = `brightness(0.19)`
+                        });
+                    });
+
+
+                } else if (e.target.style.filter == `brightness(0.19)`) {      
+                    e.target.style.filter = `brightness(0.1)`
+
+                    rowDivRtgb.forEach((div) => {
+                        div.addEventListener(`mouseleave`, function (e) {
+                        e.target.style.filter = `brightness(0.09)`
+                        });
+                    });
+
+
+                } else if (e.target.style.filter == `brightness(0.09)`) {
+                    e.target.style.filter = `brightness(0.0)`
+
+                    rowDivRtgb.forEach((div) => {
+                        div.addEventListener(`mouseleave`, function (e) {
+                        e.target.style.filter = `brightness(0.0)`
+                        });
+                
+                    });
+                } 
+            });                    
         });
-
-            test.forEach((div) => {
-
-            div.addEventListener(`mouseleave`, function (e) {
-                e.target.style.backgroundColor = `rgb(${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]})`;
-
-            });
-
-        });
-
     }
-
-    // querySelector for each "square" in the grid to create a "hover" effect for the cursor
+    

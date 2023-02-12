@@ -19,6 +19,7 @@ body {
     margin: 15px;
     border-style: solid;
     border-color: chocolate;
+    background-color: hsla(16, 100%, 66%, 0.585);
     height: 500px;
     width: 500px;
 }
@@ -29,6 +30,8 @@ body {
 }
 
 .rowdivs {     
-    background-color: coral; 
+    background-color: rgb(255, 127, 80);
     display: flex;
+    filter: brightness(1);
+    
 }

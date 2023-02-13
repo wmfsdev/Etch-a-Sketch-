@@ -2,9 +2,7 @@
     
     button()
 
-    let inputValue;  
-    // stores input value generated from either 'input' or 'errorInput' function
-    
+    let inputValue;  // stores input value generated from either 'input' or 'errorInput' function
     let rgbArray = []
 
     function start() {
@@ -13,7 +11,6 @@
         while (element.firstChild) {
             element.removeChild(element.firstChild);
         }   // clears the container of child elements (if there are any) ready to input new grid value
-        
         input()
         generateRows(inputValue);
         generateDivs(inputValue);
@@ -52,14 +49,11 @@
 
     
     function button() {
-
         const buttoncontainer = document.querySelector(`body`);
-
         const button = document.createElement(`button`);
         button.classList.add(`button`);
         button.textContent = "Etch that Sketch!"
         buttoncontainer.insertBefore(button, buttoncontainer.firstElementChild);
-
         button.addEventListener(`click`, start);
     }   // button to generate prompt for user determined grid size
 
@@ -69,12 +63,11 @@
         const secondrow = document.querySelector(`.container`);
     
         for (let i = 0 ; i < inputValue ; i++) {
-
+            
             const rowcon = document.createElement(`div`);
             rowcon.classList.add(`rowcon`);
             rowcon.setAttribute('style', `height: ${500 / inputValue}px; flex-grow: 1;`); 
             // sets height of all "rows" to fit evenly into the parent container
-
             secondrow.appendChild(rowcon);  
         }
     }   // generates a number of <div> "rows" based on the value entered by the user    
@@ -87,17 +80,13 @@
           for (let i = 0 ; i < rowcondivs.length ; i++) { 
 
                 const rowdivs = document.createElement(`div`); 
-
                 rowdivs.classList.add(`rowdivs`);
 
             for (let n = 0 ; n < rowcondivs.length ; n++) {
 
                 const rowdivs = document.createElement(`div`); 
-
                 rowdivs.classList.add(`rowdivs`);
-
                 rowdivs.setAttribute('style', `height: ${500 / inputValue}px; flex-grow: 1;`);
-
                 rowcondivs[n].appendChild(rowdivs); 
             }    
         }
@@ -136,113 +125,71 @@
 
     function getDivBrightness() {
 
-        const rowDivRtgb = document.querySelectorAll(`.rowdivs`)
+        const rowDivRtgb = document.querySelectorAll(`.rowdivs`);
 
             rowDivRtgb.forEach((div) => {
             div.addEventListener(`mouseover`, function (e) {
         
                 if (e.target.style.filter == `brightness(0.99)`) {      
-                    e.target.style.filter = `brightness(0.9)`
-
-                    rowDivRtgb.forEach((div) => {
-                        div.addEventListener(`mouseleave`, function (e) {
-                        e.target.style.filter = `brightness(0.89)`
-                        });
+                    e.target.style.filter = `brightness(0.9)`;
+                    div.addEventListener(`mouseleave`, function (e) {
+                    e.target.style.filter = `brightness(0.89)`;
                     });
-
-
+                   
                 } else if (e.target.style.filter == `brightness(0.89)`) {      
-                    e.target.style.filter = `brightness(0.8)`
-
-                    rowDivRtgb.forEach((div) => {
-                        div.addEventListener(`mouseleave`, function (e) {
-                        e.target.style.filter = `brightness(0.79)`
-                        });
+                    e.target.style.filter = `brightness(0.8)`;
+                    div.addEventListener(`mouseleave`, function (e) {
+                    e.target.style.filter = `brightness(0.79)`;
                     });
-
-
+           
                 } else if (e.target.style.filter == `brightness(0.79)`) {      
-                    e.target.style.filter = `brightness(0.7)`
-                    
-                    rowDivRtgb.forEach((div) => {
-                        div.addEventListener(`mouseleave`, function (e) {
-                        e.target.style.filter = `brightness(0.69)`
-                        });
+                    e.target.style.filter = `brightness(0.7)`;
+                    div.addEventListener(`mouseleave`, function (e) {
+                    e.target.style.filter = `brightness(0.69)`;
                     });
-
-
+             
                 } else if (e.target.style.filter == `brightness(0.69)`) {     
                     e.target.style.filter = `brightness(0.6)`
-
-                    rowDivRtgb.forEach((div) => {
-                        div.addEventListener(`mouseleave`, function (e) {
-                        e.target.style.filter = `brightness(0.59)`
-                        });
+                    div.addEventListener(`mouseleave`, function (e) {
+                    e.target.style.filter = `brightness(0.59)`
                     });
-
-
+                  
                 } else if (e.target.style.filter == `brightness(0.59)`) {
                     e.target.style.filter = `brightness(0.5)`
-
-                    rowDivRtgb.forEach((div) => {
-                        div.addEventListener(`mouseleave`, function (e) {
-                        e.target.style.filter = `brightness(0.49)`
-                        });
+                    div.addEventListener(`mouseleave`, function (e) {
+                    e.target.style.filter = `brightness(0.49)`
                     });
-
-
+                 
                 } else if (e.target.style.filter == `brightness(0.49)`) {
                     e.target.style.filter = `brightness(0.4)`
-
-                    rowDivRtgb.forEach((div) => {
-                        div.addEventListener(`mouseleave`, function (e) {
-                        e.target.style.filter = `brightness(0.39)`
-                        });
+                    div.addEventListener(`mouseleave`, function (e) {
+                    e.target.style.filter = `brightness(0.39)`
                     });
-
-
+         
                 } else if (e.target.style.filter == `brightness(0.39)`) {
                     e.target.style.filter = `brightness(0.3)`
-
-                    rowDivRtgb.forEach((div) => {
-                        div.addEventListener(`mouseleave`, function (e) {
-                        e.target.style.filter = `brightness(0.29)`
-                        });
+                    div.addEventListener(`mouseleave`, function (e) {
+                    e.target.style.filter = `brightness(0.29)`
                     });
-
-
+                 
                 } else if (e.target.style.filter == `brightness(0.29)`) {
                     e.target.style.filter = `brightness(0.2)`
-
-                    rowDivRtgb.forEach((div) => {
-                        div.addEventListener(`mouseleave`, function (e) {
-                        e.target.style.filter = `brightness(0.19)`
-                        });
+                    div.addEventListener(`mouseleave`, function (e) {
+                    e.target.style.filter = `brightness(0.19)`
                     });
-
 
                 } else if (e.target.style.filter == `brightness(0.19)`) {      
                     e.target.style.filter = `brightness(0.1)`
-
-                    rowDivRtgb.forEach((div) => {
-                        div.addEventListener(`mouseleave`, function (e) {
-                        e.target.style.filter = `brightness(0.09)`
-                        });
+                    div.addEventListener(`mouseleave`, function (e) {
+                    e.target.style.filter = `brightness(0.09)`
                     });
-
-
+                  
                 } else if (e.target.style.filter == `brightness(0.09)`) {
                     e.target.style.filter = `brightness(0.0)`
-
-                    rowDivRtgb.forEach((div) => {
-                        div.addEventListener(`mouseleave`, function (e) {
-                        e.target.style.filter = `brightness(0.0)`
-                        });
-                
+                    div.addEventListener(`mouseleave`, function (e) {
+                    e.target.style.filter = `brightness(0.0)`
                     });
                 } 
             });                    
         });
     }
-    
-    

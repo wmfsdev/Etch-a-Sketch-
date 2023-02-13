@@ -105,7 +105,7 @@
             let getColor = window.getComputedStyle(div);     
             let divRgb = getColor.getPropertyValue('background-color');
 
-                if (divRgb == "rgb(255, 127, 80)")  {
+                if (divRgb == "rgb(200, 228, 255)")  {
                     
                     rgbValues() 
                     e.target.style.backgroundColor = `rgb(${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]})`; 
@@ -119,7 +119,7 @@
         });    
     }   
         // changes div background colour to randomised RGB value for as long as it is not the preset value of
-        // 'coral' rgb(255, 127, 80). On mouseleave it sets the div to a new brightness value just under 1
+        // 'coral' rgb(200, 228, 255). On mouseleave it sets the div to a new brightness value just under 1
         // to prime it for getDivBrightness(). This creates an imperceptible brightness value change which allows
         // the next function to use that value as its condition in the if statement to darken the targetted div.
 

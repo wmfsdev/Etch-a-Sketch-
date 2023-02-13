@@ -9,29 +9,32 @@ body {
     flex-direction: column;
     align-items: center;
     height: 100%;
+    background-color:papayawhip;
 }
 
 .button {
     font-size: 18px;
+    border-color: rgba(238, 156, 97, 0.831);
+    padding: 5px;
+    margin: 5px;
 }
 
 .container {
     margin: 15px;
     border-style: solid;
-    border-color: chocolate;
-    background-color: hsla(16, 100%, 66%, 0.585);
+    border-width: 2px;
+    border-color: rgba(233, 133, 62, 0.768);
+    background-color: rgb(200, 228, 255);
     height: 500px;
     width: 500px;
 }
 
 .rowcon {
-    display: flex;
-    background-color:aquamarine; 
+    display: flex;  
 }
 
 .rowdivs {     
-    background-color: rgb(255, 127, 80);
+    background-color: rgb(200, 228, 255);
     display: flex;
-    filter: brightness(1);
-    
+    filter: brightness(1); 
 }
